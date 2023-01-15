@@ -6,7 +6,7 @@ resource "azurerm_application_gateway" "app_gateway" {
   sku {
     name     = "Standard_Small"
     tier     = "Standard"
-    capacity = 1
+    capacity = 2
   }
 
   gateway_ip_configuration {
@@ -25,13 +25,13 @@ resource "azurerm_application_gateway" "app_gateway" {
   }
 
   backend_address_pool {
-    name = "${var.projName}-webApp1"
+    name = "${var.projName}-videopool"
     ip_addresses = [
     "${azurerm_network_interface.app_interface1.private_ip_address}"]
   }
 
   backend_address_pool {
-    name = "${var.projName}-webApp2"
+    name = "${var.projName}-imagepool"
     ip_addresses = [
     "${azurerm_network_interface.app_interface2.private_ip_address}"]
   }
@@ -55,7 +55,7 @@ resource "azurerm_application_gateway" "app_gateway" {
   request_routing_rule {
     name               = "${var.projName}-RoutingRuleA"
     rule_type          = "PathBasedRouting"
-    url_path_map_name  = "RoutingPath"
+    url_path_map_name  = "${var.projName}-RoutingPath"
     http_listener_name = "${var.projName}-gateway-listener"
   }
 
@@ -66,19 +66,19 @@ resource "azurerm_application_gateway" "app_gateway" {
 
     path_rule {
       name                       = "${var.projName}-Test1RoutingRule"
-      backend_address_pool_name  = "${var.projName}-webApp1"
+      backend_address_pool_name  = "${var.projName}-videopool"
       backend_http_settings_name = "${var.projName}-HTTPSetting"
       paths = [
-        "/test1/*",
+        "/videos/*",
       ]
     }
 
     path_rule {
-      name                       = "Test2RoutingRule"
-      backend_address_pool_name  = "${var.projName}-webApp2"
+      name                       = "${var.projName}-Test2RoutingRule"
+      backend_address_pool_name  = "${var.projName}-imagepool"
       backend_http_settings_name = "${var.projName}-HTTPSetting"
       paths = [
-        "/test2/*",
+        "/images/*",
       ]
     }
   }

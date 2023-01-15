@@ -32,13 +32,10 @@ resource "azurerm_virtual_machine_extension" "vm_extension1" {
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.10"
-  depends_on = [
-    azurerm_storage_blob.IIS_config_test1
-  ]
   settings = <<SETTINGS
     {
-        "fileUris": ["https://${azurerm_storage_account.appstore.name}.blob.core.windows.net/data/IIS_Config_video.ps1"],
-          "commandToExecute": "powershell -ExecutionPolicy Unrestricted -file IIS_Config_test1.ps1"     
+      "fileUris": ["https://github.com/rverspaij/IaC-Terraform/blob/main/Infrastructure%20as%20Code%20(last%20version)/IIS_Config_test1.ps1"],
+        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -file IIS_Config_test1.ps1"
     }
 SETTINGS
 }
@@ -77,13 +74,11 @@ resource "azurerm_virtual_machine_extension" "vm_extension2" {
   publisher            = "Microsoft.Compute"
   type                 = "CustomScriptExtension"
   type_handler_version = "1.10"
-  depends_on = [
-    azurerm_storage_blob.IIS_config_test2
-  ]
   settings = <<SETTINGS
     {
-        "fileUris": ["https://${azurerm_storage_account.appstore.name}.blob.core.windows.net/data/IIS_Config_image.ps1"],
-          "commandToExecute": "powershell -ExecutionPolicy Unrestricted -file IIS_Config_test2.ps1"     
+        "fileUris": ["https://github.com/rverspaij/IaC-Terraform/blob/main/Infrastructure%20as%20Code%20(last%20version)/IIS_Config_test2.ps1"],
+        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File IIS_Config_test2.ps1"
+
     }
 SETTINGS
 }

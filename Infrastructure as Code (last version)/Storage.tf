@@ -1,15 +1,10 @@
-resource "azurerm_storage_account" "appstore" {
+/* resource "azurerm_storage_account" "appstore" {
   name                     = "appstore99887722"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = var.default-location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-}
-
-resource "azurerm_storage_account_network_rules" "rules" {
-  storage_account_id = azurerm_storage_account.appstore.id
-  default_action     = "Allow"
-  bypass             = ["Metrics", "Logging", "AzureServices"]
+  allow_nested_items_to_be_public = true
 }
 
 resource "azurerm_storage_container" "data" {
@@ -37,4 +32,4 @@ resource "azurerm_storage_blob" "IIS_config_test2" {
   type                   = "Block"
   source                 = "IIS_Config_test2.ps1"
   depends_on             = [azurerm_storage_container.data]
-}
+} */
