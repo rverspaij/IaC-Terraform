@@ -2,7 +2,7 @@ resource "azurerm_windows_virtual_machine" "Web_vm1" {
   name                = "${var.projName}-Web-vm1"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.default-location
-  size                = "Standard_D2s_v3"
+  size                = "Standard_B1s"
   admin_username      = "GebruikerRaoul"
   admin_password      = "Admin01!"
   network_interface_ids = [
@@ -48,7 +48,7 @@ resource "azurerm_windows_virtual_machine" "Web_vm2" {
   name                = "${var.projName}-web-vm2"
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.default-location
-  size                = "Standard_D2s_v3"
+  size                = "Standard_B1s"
   admin_username      = "GebruikerRaoul"
   admin_password      = "Admin01!"
   network_interface_ids = [

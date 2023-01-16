@@ -6,7 +6,7 @@ resource "azurerm_application_gateway" "app_gateway" {
   sku {
     name     = "Standard_Small"
     tier     = "Standard"
-    capacity = 2
+    capacity = 1
   }
 
   gateway_ip_configuration {
