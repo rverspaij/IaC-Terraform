@@ -3,8 +3,8 @@ resource "azurerm_mysql_flexible_server" "mySQLDB" {
   count                  = local.database ? 1 : 0
   resource_group_name    = azurerm_resource_group.rg.name
   location               = azurerm_resource_group.rg.location
-  administrator_login    = "psqladmin"
-  administrator_password = "Welkom123"
+  administrator_login    = var.username
+  administrator_password = var.password
   backup_retention_days  = 7
   delegated_subnet_id    = azurerm_subnet.Sub-DB.id
   private_dns_zone_id    = azurerm_private_dns_zone.pdns.id

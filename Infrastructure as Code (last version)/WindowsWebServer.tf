@@ -3,8 +3,8 @@ resource "azurerm_windows_virtual_machine" "Web_vm1" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.default-location
   size                = "Standard_B1s"
-  admin_username      = "GebruikerRaoul"
-  admin_password      = "Admin01!"
+  admin_username      = var.username
+  admin_password      = var.password
   network_interface_ids = [
     azurerm_network_interface.app_interface1.id,
   ]
@@ -49,8 +49,8 @@ resource "azurerm_windows_virtual_machine" "Web_vm2" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.default-location
   size                = "Standard_B1s"
-  admin_username      = "GebruikerRaoul"
-  admin_password      = "Admin01!"
+  admin_username      = var.username
+  admin_password      = var.password
   network_interface_ids = [
     azurerm_network_interface.app_interface2.id,
   ]
@@ -72,7 +72,7 @@ resource "azurerm_windows_virtual_machine" "Web_vm2" {
   ]
 }
 
-resource "azurerm_virtual_machine_extension" "vm_extension2" {
+ resource "azurerm_virtual_machine_extension" "vm_extension2" {
   name                 = "${var.projName}-vm-extension2"
   virtual_machine_id   = azurerm_windows_virtual_machine.Web_vm2.id
   publisher            = "Microsoft.Compute"
@@ -87,4 +87,4 @@ resource "azurerm_virtual_machine_extension" "vm_extension2" {
           "commandToExecute": "powershell -ExecutionPolicy Unrestricted -file IIS_Config_image.ps1"     
     }
 SETTINGS
-}
+} 

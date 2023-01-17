@@ -10,6 +10,18 @@ variable "default-tags" {
   }
 }
 
+variable "username" {
+  description = "Fill in your username that you would like to use for your machines."
+  type = string
+  sensitive = false
+}
+
+variable "password" {
+  description = "Fill your password that you want to use for your machines."
+  type = string
+  sensitive = true
+}
+
 variable "default-location" {
   default = "westeurope"
 }
