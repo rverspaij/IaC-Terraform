@@ -19,6 +19,12 @@ resource "azurerm_linux_web_app" "appService" {
 
   site_config {
     always_on = true
+
+    application_stack {
+      docker_image     = "rverspaij/test"
+      docker_image_tag = "latest"
+      dotnet_version   = "6.0"
+    }
   }
 }
 

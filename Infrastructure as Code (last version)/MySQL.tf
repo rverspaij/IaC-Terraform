@@ -6,7 +6,7 @@ resource "azurerm_mysql_flexible_server" "mySQLDB" {
   administrator_login    = "psqladmin"
   administrator_password = "Welkom123"
   backup_retention_days  = 7
-  delegated_subnet_id    = azurerm_subnet.LAN.id
+  delegated_subnet_id    = azurerm_subnet.Sub-DB.id
   private_dns_zone_id    = azurerm_private_dns_zone.pdns.id
   sku_name               = "B_Standard_B1s"
 

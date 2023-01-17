@@ -1,6 +1,6 @@
 locals {
   database = false
-  docker   = false
+  docker   = true
 }
 
 variable "default-tags" {

@@ -7,6 +7,13 @@ resource "azurerm_storage_account" "appstore" {
   allow_nested_items_to_be_public = true
 }
 
+resource "azurerm_storage_account_network_rules" "StorageNR" {
+  storage_account_id = azurerm_storage_account.appstore.id
+
+  default_action             = "Deny"
+  virtual_network_subnet_ids = [azurerm_subnet.LAN.id]
+}
+
 resource "azurerm_storage_container" "data" {
   name                  = "data"
   storage_account_name  = "appstore912094"

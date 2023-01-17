@@ -11,13 +11,23 @@ resource "azurerm_subnet" "LAN" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
-  #delegation {
-  # name = "fs"
 
-  #service_delegation {
-  # name = "Microsoft.DBforMySQL/flexibleServers"
-  #}
-  #}
+  service_endpoints = ["Microsoft.Storage"]
+}
+
+resource "azurerm_subnet" "Sub-DB" {
+  name                 = "${var.projName}-Sub-DB"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.2.0/24"]
+
+  delegation {
+    name = "DB-delegation"
+
+    service_delegation {
+      name = "Microsoft.DBforMySQL/flexibleServers"
+    }
+  }
 }
 
 resource "azurerm_subnet" "DMZ" {
